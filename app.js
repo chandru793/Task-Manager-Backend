@@ -10,7 +10,15 @@ const errorHandlerMiddleware = require("./middleware/errorHandler");
 const port = process.env.PORT;
 //middlewares
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: ["https://task-manager-chandru.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use("/api/v1/tasks", tasks);
 
 app.use(notFound); //Route does not exist
